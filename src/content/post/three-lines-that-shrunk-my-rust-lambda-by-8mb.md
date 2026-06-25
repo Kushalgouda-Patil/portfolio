@@ -3,6 +3,7 @@ title: "Three Lines That Shrunk My Rust Lambda by 8MB"
 description: "Three Cargo.toml settings that reduced my Rust Lambda binary by 8MB and cut cold start latency."
 publishDate: "2026-06-19"
 tags: ["rust", "llvm", "computer-science", "technology"]
+pinned: true
 ---
 
 The default release profile in Rust isn't optimized for production Lambda deployments. Rust's standard release configuration prioritizes build speed over output quality, which directly impacts cold start latency in serverless environments.

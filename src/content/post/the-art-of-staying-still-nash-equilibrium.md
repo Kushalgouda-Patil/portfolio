@@ -3,6 +3,7 @@ title: "The Art of Staying Still: Nash Equilibrium"
 description: "What your dating life and a salary negotiation have in common — and why no one dares to change their mind."
 publishDate: "2026-04-30"
 tags: ["life", "philosophy"]
+pinned: true
 ---
 
 *What your dating life, and a salary negotiation have in common and why no one dares to change their mind.*
