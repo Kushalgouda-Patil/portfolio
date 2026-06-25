@@ -5,6 +5,8 @@
   Astro Cactus
 </h1>
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3bd50ceb-1df5-4c54-b0af-a9a58234bf65/deploy-status)](https://app.netlify.com/projects/kushal-patil/deploys)
+
 Astro Cactus is a simple opinionated starter built with [Astro](https://astro.build). Use it to create an easy-to-use blog or website.
 
 ## Table Of Contents
