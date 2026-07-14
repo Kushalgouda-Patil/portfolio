@@ -1,0 +1,74 @@
+---
+import { render } from "astro:content";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import FormattedDate from "@/components/FormattedDate.astro";
+import { getAllProjects } from "@/data/project";
+import PageLayout from "@/layouts/Base.astro";
+
+// if you're using an adaptor in SSR mode, getStaticPaths wont work -> https://docs.astro.build/en/guides/routing/#modifying-the-slug-example-for-ssr
+export const getStaticPaths = (async () => {
+	const allProjects = await getAllProjects();
+	return allProjects.map((project) => ({
+		params: { slug: project.id },
+		props: { project },
+	}));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+const meta = {
+	description: project.data.description,
+	title: project.data.title,
+};
+---
+
+<PageLayout meta={meta}>
+	<h1 class="title mb-4">{project.data.title}</h1>
+	<FormattedDate class="text-muted" date={project.data.publishDate} />
+	{
+		project.data.coverImage && (
+			<Image
+				alt={project.data.coverImage.alt}
+				class="mt-6 max-w-70 rounded-md"
+				height={project.data.coverImage.src.height}
+				src={project.data.coverImage.src}
+				width={project.data.coverImage.src.width}
+			/>
+		)
+	}
+	{
+		(project.data.repoUrl || project.data.liveUrl) && (
+			<div class="mt-4 flex gap-4 text-sm">
+				{project.data.repoUrl && (
+					<a class="cactus-link inline-flex items-center gap-1" href={project.data.repoUrl}>
+						<Icon aria-hidden="true" class="h-4 w-4" focusable="false" name="mdi:github" />
+						Code
+					</a>
+				)}
+				{project.data.liveUrl && (
+					<a class="cactus-link inline-flex items-center gap-1" href={project.data.liveUrl}>
+						<Icon aria-hidden="true" class="h-4 w-4" focusable="false" name="mdi:open-in-new" />
+						Live
+					</a>
+				)}
+			</div>
+		)
+	}
+	{
+		project.data.tags.length > 0 && (
+			<ul class="mt-4 flex flex-wrap gap-2 text-sm" role="list">
+				{project.data.tags.map((tag) => (
+					<li class="bg-global-text/10 rounded px-2 py-0.5">{tag}</li>
+				))}
+			</ul>
+		)
+	}
+	<div class="prose prose-sm prose-cactus mt-8 max-w-none">
+		<Content />
+	</div>
+</PageLayout>

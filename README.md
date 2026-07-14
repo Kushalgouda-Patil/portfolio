@@ -54,6 +54,26 @@ pinned: false
 Note content here.
 ```
 
+## Adding a Project
+
+Add a `.md` file to `src/content/project/`:
+
+```markdown
+---
+title: "Project Name"
+description: "A short description."
+publishDate: "2026-06-25"
+tags: ["tag-one", "tag-two"]
+repoUrl: "https://github.com/you/repo"
+liveUrl: "https://example.com"
+pinned: false
+---
+
+Project write-up here.
+```
+
+Shows up at `/projects/`, with a detail page at `/projects/<file-name>/`.
+
 ## Commands
 
 | Command          | Action                                      |
